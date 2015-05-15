@@ -15,3 +15,32 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+	color: #222;
+	font-size: 18px;
+  	font-weight: 500;
+  	font-family: "adelle",serif;
+  	line-height: 1.4;
+  	margin: 0;
+  	padding: 0;
+  	border: 0;
+  	vertical-align: baseline;
+  	-webkit-font-smoothing: antialiased;
+}
+
+p {
+  display: block;
+  margin: 1em 0;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+.static_page {
+	margin: 0 auto;
+  	font-size: 20px;
+  	line-height: 32px;
+  	margin-top: 50px;
+}
