@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'responders', '~> 2.0'
 gem 'rails_admin', '~> 0.6.7'
 gem 'bootstrap-sass', '~> 3.3.4'
+gem 'active_model_serializers', '~> 0.9.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

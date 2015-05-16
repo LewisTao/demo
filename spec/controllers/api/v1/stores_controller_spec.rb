@@ -14,9 +14,9 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 				get :show, id: @store, format: :json
 			end
 
-			it "returns the information about store" do
-				store_repsonse = json_response
-				expect(store_repsonse[:name]).to eql @store.name
+			it "returns the information about store in a hash" do
+				store_response = json_response[:store]
+				expect(store_response[:name]).to eql @store.name
 			end
 			
 			it { should respond_with 200 }
