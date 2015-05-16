@@ -15,7 +15,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			end
 
 			it "returns the information about store" do
-				store_repsonse = JSON.parse(response.body, symbolize_names: true)
+				store_repsonse = json_response
 				expect(store_repsonse[:name]).to eql @store.name
 			end
 			
