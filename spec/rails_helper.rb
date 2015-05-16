@@ -50,4 +50,7 @@ RSpec.configure do |config|
 
   # Including to test requests
   config.include Request::JsonHelpers, type: :controller
+
+  config.include Request::OpenTimeHelpers, type: :controller
+  config.include Request::OpenTimeHelpers, type: :model
 end
