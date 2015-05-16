@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 # Basic gem
+gem 'responders', '~> 2.0'
 gem 'rails_admin', '~> 0.6.7'
 gem 'bootstrap-sass', '~> 3.3.4'
 
