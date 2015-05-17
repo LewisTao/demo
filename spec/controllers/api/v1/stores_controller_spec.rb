@@ -42,7 +42,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 
 	# Create action
 	describe "POST #create" do
-		context "when is successfully created" do
+		context "with valid attributes" do
 			before(:each) do
 				@store_attributes = FactoryGirl.attributes_for :store, open_time: open_time
 			end
@@ -63,8 +63,14 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 
 			# HTML
 			context "html response" do
-				before(:each) do
+
+				it "saves the new store in the database" do
+					expect{ post :create, store: @store_attributes, format: :html }.to change(Store, :count).by(1)
+				end
+
+				it "redirects to the new store" do
 					post :create, store: @store_attributes, format: :html
+					expect(response).to redirect_to action: :show, id: assigns(:store).id
 				end
 			end
 		end
