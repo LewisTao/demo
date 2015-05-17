@@ -112,4 +112,24 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			end
 		end
 	end
+
+	# New action
+	describe "GET #new" do
+		before(:each) do
+			get :new, format: :html
+		end
+	
+		it "assigns a new attributes for create store" do
+			expect(assigns(:store)).to be_a_new(Store)
+		end
+
+		it "responds successfully with an HTTP status code" do
+			expect(response).to be_success
+			expect(response).to have_http_status(200)
+		end
+
+		it "renders the new template" do
+			expect(response).to render_template("new")
+		end
+	end
 end

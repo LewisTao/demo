@@ -26,6 +26,7 @@ class Api::V1::StoresController < ApplicationController
 		end
 	end
 
+
 	private
 		def store_params
 			params.require(:store).permit(:name, :description, :address, {:open_time => [:day1, :day2]})
