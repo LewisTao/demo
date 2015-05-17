@@ -8,6 +8,9 @@ class Api::V1::StoresController < ApplicationController
 		end
 	end
 
+	def new
+		@store = Store.new
+	end
 
 	def create
 		@store = Store.create(store_params)

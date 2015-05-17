@@ -42,6 +42,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 
 	# Create action
 	describe "POST #create" do
+		# Successfully create new store
 		context "with valid attributes" do
 			before(:each) do
 				@store_attributes = FactoryGirl.attributes_for :store, open_time: open_time
@@ -71,6 +72,42 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 				it "redirects to the new store" do
 					post :create, store: @store_attributes, format: :html
 					expect(response).to redirect_to action: :show, id: assigns(:store).id
+				end
+			end
+		end
+
+		# Unsuccessfully create new store
+		context "with invalid attributes" do
+
+			#JSON
+			context "json response" do
+				before(:each) do
+					@invalid_store_attributes = FactoryGirl.attributes_for :store
+					post :create, store: @invalid_store_attributes, format: :json
+				end
+
+				it "render an errors json" do
+					expect(json_response).to have_key(:errors)
+				end
+
+				it "renders the json errors full messages" do
+					expect(json_response[:errors][:open_time]).to include("can't be blank")
+				end
+			end
+
+			#HTML
+			context "html response" do
+				before(:each) do
+					@invalid_store_attributes = FactoryGirl.attributes_for :store
+				end
+
+				it "does not save the new store" do
+					expect{ post :create, store: @invalid_store_attributes, format: :html}.to change(Store, :count).by(0)
+				end
+
+				it "re-renders the new method" do
+					post :create, store: @invalid_store_attributes, format: :html
+					expect(response).to render_template("new")
 				end
 			end
 		end
