@@ -1,0 +1,11 @@
+<%= simple_form_for(@store, url: api_stores_path, html: { multipart: true }) do |f| %>
+	<%= f.input :name %>
+	<%= f.input :address %>
+	<%= f.input :description %>
+	<%= f.input :image, as: :file %>
+	<%= f.simple_fields_for :open_time do |ff| %>
+		<%= ff.input :day1 %>
+		<%= ff.input :day2 %>
+	<% end %>
+	<%= f.button :submit %>
+<% end %>

@@ -2,7 +2,14 @@ class Api::V1::StoresController < ApplicationController
 	# before filter
 	before_action :set_store, except: [:index, :new, :create]
 
-
+	def index
+		@stores = Store.all.order("created_at DESC")
+		respond_to do |format|
+			format.html
+			format.json { render json: @stores, status: 200 }
+		end
+	end
+	
 	def show
 		respond_to do |format|
 			format.html
@@ -60,7 +67,7 @@ class Api::V1::StoresController < ApplicationController
 		end
 
 		def store_params
-			params.require(:store).permit(:name, :description, :address, {:open_time => [:day1, :day2]})
+			params.require(:store).permit(:name, :description, :address, {:open_time => [:day1, :day2]}, :image)
 		end
 
 end

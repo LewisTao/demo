@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# Simple form
+gem 'simple_form', '~> 3.1.0'
+
+# Image upload
+gem 'paperclip', '~> 4.2.1'
 
 # Basic gem
 gem 'responders', '~> 2.0'
