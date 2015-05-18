@@ -132,4 +132,75 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			expect(response).to render_template("new")
 		end
 	end
+
+	# Update action
+	describe "PATCH/PUT #update" do
+		before(:each) do
+			@store = FactoryGirl.create :store, open_time: open_time
+		end
+
+		# Valid attributes
+		context "with vaild attributes" do
+			#json response
+			context "json response" do
+				before(:each) do
+					put :update, id: @store.id, store: { name: "New json attributes" }, format: :json
+				end
+
+				it "@store updated successfully with new attributes" do
+					expect(json_response[:store][:name]).to eql "New json attributes"
+				end
+
+				it { should respond_with 200 }
+			end
+
+			# html response
+			context "html response" do
+				before(:each) do
+					put :update, id: @store.id, store: { name: "New html attributes" }, format: :html
+				end
+
+				it "changes @store's attributes and redirects to updated store" do
+					@store.reload
+					expect(assigns(:store).name).to eql "New html attributes"
+					expect(response).to redirect_to action: :show, id: @store.id
+				end
+
+			end
+		end
+
+		# Invalid attributes
+		context "with invalid attributes" do
+			
+			# json response
+			context "json response" do
+				before(:each) do
+					put :update, id: @store.id, store: { open_time: "invalid attributes" }, format: :json
+				end
+
+				it "renders an errors json key" do
+					expect(json_response).to have_key(:errors)
+				end
+
+				it "renders the json errors full messages" do
+					expect(json_response[:errors][:open_time]).to include "can't be blank"
+				end
+
+				it { should respond_with 422 }
+			end
+
+			# html response
+			context "html response" do
+				before(:each) do
+					put :update, id: @store.id, store: { open_time: "invalid attributes" }, format: :html
+				end
+
+				it "does not change @store's attributes and re-renders the edit action" do
+					@store.reload
+					expect(@store.open_time).not_to match("invalid attributes")
+					expect(response).to render_template("edit")
+				end
+			end
+		end
+	end
 end
