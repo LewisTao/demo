@@ -43,6 +43,15 @@ class Api::V1::StoresController < ApplicationController
 		end
 	end
 
+	def destroy
+		@store.destroy
+
+		respond_to do |format|
+			format.html { redirect_to root_path, success: "Successfully deleted!" }
+			format.json { head 204 }
+		end
+	end
+
 
 	private
 

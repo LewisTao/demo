@@ -52,5 +52,4 @@ RSpec.configure do |config|
   config.include Request::JsonHelpers, type: :controller
 
   config.include Request::OpenTimeHelpers, type: :controller
-  config.include Request::OpenTimeHelpers, type: :model
 end

@@ -203,4 +203,33 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			end
 		end
 	end
+
+	# Destroy action
+	describe "DELETE #destroy" do
+		before(:each) do
+			@store = FactoryGirl.create :store, open_time: open_time
+		end
+
+		# json response
+		context "json resonse" do
+			before(:each) do
+				delete :destroy, id: @store.id, format: :json
+			end
+
+			it { should respond_with 204 }
+		end
+
+		# html response
+		context "html response" do
+			it "deletes the store" do
+				expect{ delete :destroy, id: @store.id, format: :html }.to change(Store, :count).by(-1)
+				byebug
+			end
+
+			it "redirects to home page" do
+				delete :destroy, id: @store, format: :html
+				expect(response).to redirect_to root_path
+			end
+		end
+	end
 end
