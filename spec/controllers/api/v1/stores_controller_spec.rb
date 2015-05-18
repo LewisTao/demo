@@ -223,7 +223,6 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 		context "html response" do
 			it "deletes the store" do
 				expect{ delete :destroy, id: @store.id, format: :html }.to change(Store, :count).by(-1)
-				byebug
 			end
 
 			it "redirects to home page" do
