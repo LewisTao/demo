@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
 	# before filter
-	before_action :authenticat_with_token!, only: [:update, :destroy]
+	before_action :authenticate_with_token!, only: [:update, :destroy]
 	
 	def index
 		@users = User.all.order("created_at DESC")
