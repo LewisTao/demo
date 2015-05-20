@@ -53,4 +53,6 @@ RSpec.configure do |config|
 
   config.include Request::OpenTimeHelpers, type: :controller
   config.include Request::OpenTimeHelpers, type: :model
+
+  config.include Devise::TestHelpers, type: :controller
 end
