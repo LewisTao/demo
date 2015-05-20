@@ -91,6 +91,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 	describe "PUT/PATCH #update" do
 		before(:each) do
 			@user = FactoryGirl.create :user
+			request.headers["Authorization"] = @user.auth_token
 		end
 
 		# Successfully updated
@@ -128,6 +129,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 	describe "DELETE #destroy" do
 		before(:each) do
 			@user = FactoryGirl.create :user
+			request.headers["Authorization"] = @user.auth_token
 			delete :destroy, id: @user.id, format: :json
 		end
 

@@ -1,8 +1,8 @@
 class Api::V1::UsersController < ApplicationController
 
 	# before filter
-	before_action :set_user, except: [:index, :new, :create]
-
+	before_action :authenticat_with_token!, only: [:update, :destroy]
+	
 	def index
 		@users = User.all.order("created_at DESC")
 		respond_to do |format|
@@ -12,6 +12,7 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def show
+		@user = User.find(params[:id])
 		respond_to do |format|
 			format.html
 			format.json { render json: @user, status: 200, location: [:api, @user] }
@@ -31,6 +32,7 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def update
+		@user = current_user
 		respond_to do |format|
 			if @user.update(user_params)
 				format.json { render json: @user, status: 200, location: [:api, @user] }
@@ -41,17 +43,14 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def destroy
-		@user.destroy
+		
+		current_user.destroy
 		respond_to do |format|
 			format.json { head 204 }
 		end
 	end
 
 	private
-		def set_user
-			@user = User.find(params[:id])
-		end
-
 		def user_params
 			params.require(:user).permit(:email, :password, :password_confirmation)
 		end
