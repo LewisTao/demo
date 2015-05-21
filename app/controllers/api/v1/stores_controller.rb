@@ -1,6 +1,9 @@
 class Api::V1::StoresController < ApplicationController
 	# before filter
 	before_action :set_store, except: [:index, :new, :create]
+	before_action :authenticate_with_token!, except: [:index, :show]
+	before_action :check_admin, except: [:index, :show]
+	before_action :check_correct_user, only: [:edit, :update, :destroy]
 
 	def index
 		@stores = Store.all.order("created_at DESC")
@@ -18,11 +21,12 @@ class Api::V1::StoresController < ApplicationController
 	end
 
 	def new
-		@store = Store.new
+		@store = current_user.stores.new
 	end
 
 	def create
-		@store = Store.create(store_params)
+		@user = User.find(params[:user_id])
+		@store = @user.stores.build(store_params)
 
 		respond_to do |format|
 			if @store.save
@@ -61,6 +65,14 @@ class Api::V1::StoresController < ApplicationController
 
 
 	private
+
+		def check_admin
+			render json: { errors: "Access denied! Please login with admin account" } unless current_user.admin?
+		end
+
+		def check_correct_user
+			redirect_to :back unless @store.user = current_user
+		end
 
 		def set_store
 			@store = Store.find(params[:id])		

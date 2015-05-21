@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :auth_token
 
+  has_many :stores, dependent: :destroy
 	# before filter
 	before_save :generate_authentication_token
 

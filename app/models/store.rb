@@ -2,6 +2,7 @@ class Store < ActiveRecord::Base
 	# before filter
 	before_save :serialize_to_hash
 	
+	belongs_to :user
 
 	# Convert text to array
 	attr_accessor :day1, :day2

@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   	# api setup
   	namespace :api, constraints: {subdomain: 'api'}, path: '/' do
     	scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-        resources :stores
-        resources :users
+        resources :users do
+          resources :stores, only: [:create, :update, :destroy, :edit, :new]
+        end
+        resources :stores, only: [:index, :show]
         resources :sessions, only: [:create, :destroy]
       end
 	end

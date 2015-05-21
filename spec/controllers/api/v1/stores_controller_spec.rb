@@ -45,17 +45,20 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 		# Successfully create new store
 		context "with valid attributes" do
 			before(:each) do
+				@user = FactoryGirl.create :user, admin: true
+				#request.headers["Authorization"] = @user.auth_token
 				@store_attributes = FactoryGirl.attributes_for :store, open_time: open_time
 			end
 
 			#JSON
 			context "json response" do
 				before(:each) do
-					post :create, store: @store_attributes, format: :json
+					#request.headers['Accept'] = "application/vnd.demo.v1, #{Mime::JSON}"
+    				#request.headers['Content-Type'] = Mime::JSON.to_s
+					post :create, {user_id: @user.id, store: @store_attributes }
 				end
 
 				it "renders the json representation for the store record just created" do
-					store_response = json_response[:store]
 					expect(json_response[:store][:name]).to eql @store_attributes[:name]
 				end
 
@@ -66,11 +69,10 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			context "html response" do
 
 				it "saves the new store in the database" do
-					expect{ post :create, store: @store_attributes, format: :html }.to change(Store, :count).by(1)
+					expect{ post :create, {user_id: @user.id, store: @store_attributes}}.to change(Store, :count).by(1)
 				end
 
 				it "redirects to the new store" do
-					post :create, store: @store_attributes, format: :html
 					expect(response).to redirect_to action: :show, id: assigns(:store).id
 				end
 			end
