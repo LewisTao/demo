@@ -1,3 +1,3 @@
 class UserInStoreSerializer < ActiveModel::Serializer
-  attributes :id, :email, :auth_token
+  attributes :id, :email
 end

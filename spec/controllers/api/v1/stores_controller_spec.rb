@@ -3,6 +3,49 @@ require 'rails_helper'
 RSpec.describe Api::V1::StoresController, type: :controller do
 	before(:each) { request.headers['Accept'] = "application/vnd.demo.v1" }
 
+	# Index action
+	describe "GET #index" do
+		before(:each) do
+			@user = FactoryGirl.create :user, admin: true
+			4.times { FactoryGirl.create :store, open_time: open_time, user_id: @user.id }
+		end
+
+		#json response
+		context "json response" do
+			before(:each) do
+				get :index, format: :json
+			end
+
+			it "returns 4 records from the database" do
+				response = json_response[:stores].count
+				expect(response).to eql 4
+			end
+
+			it "returns all store into a hash" do
+				json_response[:stores].each do |json_response|
+					expect(json_response).to be_present
+				end
+			end
+
+			it { should respond_with 200 }
+		end
+
+		# html response
+		context "html response" do
+			before(:each) do
+				get :index, format: :html
+			end
+
+			it "returns all store into a hash" do
+				expect(assigns(:stores).count).to eql 4
+			end
+
+			it "renders the index view template" do
+				expect(response).to render_template("index")
+			end
+		end
+	end
+
 	# Show action
 	describe "GET #show" do
 		before(:each) do
@@ -46,16 +89,14 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 		context "with valid attributes" do
 			before(:each) do
 				@user = FactoryGirl.create :user, admin: true
-				#request.headers["Authorization"] = @user.auth_token
-				@store_attributes = FactoryGirl.attributes_for :store, open_time: open_time
+				request.headers["Authorization"] = @user.auth_token
+				@store_attributes = FactoryGirl.attributes_for :store, open_time: open_time, user_id: @user.id
 			end
 
 			#JSON
 			context "json response" do
 				before(:each) do
-					#request.headers['Accept'] = "application/vnd.demo.v1, #{Mime::JSON}"
-    				#request.headers['Content-Type'] = Mime::JSON.to_s
-					post :create, {user_id: @user.id, store: @store_attributes }
+					post :create, {user_id: @user.id, store: @store_attributes, format: :json}
 				end
 
 				it "renders the json representation for the store record just created" do
@@ -69,10 +110,11 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			context "html response" do
 
 				it "saves the new store in the database" do
-					expect{ post :create, {user_id: @user.id, store: @store_attributes}}.to change(Store, :count).by(1)
+					expect{ post :create, {user_id: @user.id, store: @store_attributes, format: :html}}.to change(Store, :count).by(1)
 				end
 
 				it "redirects to the new store" do
+					post :create, { user_id: @user.id, store: @store_attributes, format: :html }
 					expect(response).to redirect_to action: :show, id: assigns(:store).id
 				end
 			end
@@ -80,12 +122,15 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 
 		# Unsuccessfully create new store
 		context "with invalid attributes" do
-
+			before(:each) do
+				@user = FactoryGirl.create :user, admin: true
+				request.headers["Authorization"] = @user.auth_token
+				@invalid_store_attributes = FactoryGirl.attributes_for :store, user_id: @user.id
+			end
 			#JSON
 			context "json response" do
 				before(:each) do
-					@invalid_store_attributes = FactoryGirl.attributes_for :store
-					post :create, store: @invalid_store_attributes, format: :json
+					post :create, { user_id: @user.id, store: @invalid_store_attributes, format: :json }
 				end
 
 				it "render an errors json" do
@@ -100,45 +145,29 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			#HTML
 			context "html response" do
 				before(:each) do
-					@invalid_store_attributes = FactoryGirl.attributes_for :store
+					@user = FactoryGirl.create :user, admin: true
+					@invalid_store_attributes = FactoryGirl.attributes_for :store, user_id: @user.id
 				end
 
 				it "does not save the new store" do
-					expect{ post :create, store: @invalid_store_attributes, format: :html}.to change(Store, :count).by(0)
+					expect{ post :create, { user_id: @user.id, store: @invalid_store_attributes, format: :html } }.to change(Store, :count).by(0)
 				end
 
 				it "re-renders the new method" do
-					post :create, store: @invalid_store_attributes, format: :html
+					post :create, { user_id: @user.id, store: @invalid_store_attributes, format: :html }
 					expect(response).to render_template("new")
 				end
 			end
 		end
 	end
 
-	# New action
-	describe "GET #new" do
-		before(:each) do
-			get :new, format: :html
-		end
-	
-		it "assigns a new attributes for create store" do
-			expect(assigns(:store)).to be_a_new(Store)
-		end
-
-		it "responds successfully with an HTTP status code" do
-			expect(response).to be_success
-			expect(response).to have_http_status(200)
-		end
-
-		it "renders the new template" do
-			expect(response).to render_template("new")
-		end
-	end
 
 	# Update action
 	describe "PATCH/PUT #update" do
 		before(:each) do
-			@store = FactoryGirl.create :store, open_time: open_time
+			@user = FactoryGirl.create :user, admin: true
+			request.headers["Authorization"] = @user.auth_token
+			@store = FactoryGirl.create :store, open_time: open_time, user_id: @user.id
 		end
 
 		# Valid attributes
@@ -146,7 +175,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			#json response
 			context "json response" do
 				before(:each) do
-					put :update, id: @store.id, store: { name: "New json attributes" }, format: :json
+					put :update, { user_id: @user.id, id: @store.id, store: { name: "New json attributes" }, format: :json }
 				end
 
 				it "@store updated successfully with new attributes" do
@@ -159,7 +188,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			# html response
 			context "html response" do
 				before(:each) do
-					put :update, id: @store.id, store: { name: "New html attributes" }, format: :html
+					put :update, { user_id: @user.id, id: @store.id, store: { name: "New html attributes" }, format: :html }
 				end
 
 				it "changes @store's attributes and redirects to updated store" do
@@ -177,7 +206,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			# json response
 			context "json response" do
 				before(:each) do
-					put :update, id: @store.id, store: { open_time: "invalid attributes" }, format: :json
+					put :update, { user_id: @user.id, id: @store.id, store: { open_time: "invalid attributes" }, format: :json }
 				end
 
 				it "renders an errors json key" do
@@ -194,7 +223,7 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 			# html response
 			context "html response" do
 				before(:each) do
-					put :update, id: @store.id, store: { open_time: "invalid attributes" }, format: :html
+					put :update, { user_id: @user.id, id: @store.id, store: { open_time: "invalid attributes" }, format: :html }
 				end
 
 				it "does not change @store's attributes and re-renders the edit action" do
@@ -209,7 +238,9 @@ RSpec.describe Api::V1::StoresController, type: :controller do
 	# Destroy action
 	describe "DELETE #destroy" do
 		before(:each) do
-			@store = FactoryGirl.create :store, open_time: open_time
+			@user = FactoryGirl.create :user, admin: true
+			request.headers["Authorization"] = @user.auth_token
+			@store = FactoryGirl.create :store, open_time: open_time, user_id: @user.id
 		end
 
 		# json response
