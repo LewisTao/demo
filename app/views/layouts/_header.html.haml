@@ -1,0 +1,26 @@
+%nav.navbar.navbar-default{:role => "navigation"}
+  .container-fluid
+    .row
+      .col-md-6.col-md-offset-3.col-center
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to root_path, class: "navbar-brand, navbar-center" do
+            %h1 
+              THE BEST OF
+              %br/
+              EAST LONDON
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav.navbar-left
+            %li= link_to "LIST", root_path
+            %li= link_to "MAP", root_path
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to "FAQ", faq_path
+            %li= link_to "ABOUT", about_path
+
+

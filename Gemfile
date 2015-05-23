@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'haml', '~> 4.0.6'
+
 # Devise gem
 gem 'devise', '~> 3.4.1'
 

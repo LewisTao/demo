@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   	# routes setup
   	root 'static_pages#home_page'
     get '/about', to: 'static_pages#about_page'
-    get '/FAQ', to: 'static_pages#FAQ_page'
+    get '/faq', to: 'static_pages#FAQ_page'
     
 
   	# api setup
