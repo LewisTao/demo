@@ -1,8 +1,8 @@
 class Api::V1::StoresController < ApplicationController
 	# before filter
+	before_action :authenticate_with_token!
 	before_action :set_store, except: [:index, :new, :create]
-	before_action :authenticate_with_token!, only: [:destroy, :create, :update, :edit, :new]
-	before_action :check_admin, only: [:destroy, :create, :update, :edit, :new]
+	before_action :check_admin
 	
 
 	def index
@@ -81,7 +81,13 @@ class Api::V1::StoresController < ApplicationController
 	private
 
 		def check_admin
-			render json: { errors: "Access denied! Please login with admin account" } unless current_user.admin?
+			unless current_user.admin?
+				respond_to do |format|
+					format.html { redirect_to :back, danger: "Access denied! Please login with admin account" }
+					format.json { render json: { errors: "Access denied! Please login with admin account" } }
+				end
+			end
+			
 		end
 
 		def set_store

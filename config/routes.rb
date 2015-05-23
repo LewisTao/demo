@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
     # rails admin
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-    
+
     # api setup
     namespace :api, constraints: {subdomain: 'api'}, path: '/' do
       scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
@@ -24,5 +24,5 @@ Rails.application.routes.draw do
         resources :sessions, only: [:create, :destroy]
       end
   end
-
+  
 end
