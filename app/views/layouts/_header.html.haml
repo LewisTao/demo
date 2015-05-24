@@ -8,9 +8,16 @@
 		.navbar-menu.clearfix
 			.inline.pull-left
 				%ul.list-unstyled.list-inline.pull-right
-					%li= link_to "LIST", root_path
-					%li= link_to "MAP", root_path
+					- if user_signed_in?
+						%li= link_to "ACCOUNT", root_path
+						%li= link_to "CATEGORIES", root_path
+						%li= link_to "SIGN OUT", destroy_user_session_path
+					- else
+						%li= link_to "SIGN UP", new_user_registration_path
+						%li= link_to "SIGN IN", new_user_session_path
 			.inline.pull-right
 				%ul.list-unstyled.list-inline.pull-left
-					%li= link_to "FAQ", faq_path
+					- if user_signed_in?
+						%li= link_to "MAP", root_path
 					%li= link_to "ABOUT", about_path	
+					%li= link_to "FAQ", faq_path

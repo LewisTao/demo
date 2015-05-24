@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
 	# before filter
-	before_action :authenticate_with_token!, only: [:update, :destroy]
+	before_action :api_authenticate_with_token!
 	
 	def index
 		@users = User.all.order("created_at DESC")
@@ -32,7 +32,7 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def update
-		@user = current_user
+		@user = api_current_user
 		respond_to do |format|
 			if @user.update(user_params)
 				format.json { render json: @user, status: 200, location: [:api, @user] }
@@ -44,7 +44,7 @@ class Api::V1::UsersController < ApplicationController
 
 	def destroy
 		
-		current_user.destroy
+		api_current_user.destroy
 		respond_to do |format|
 			format.json { head 204 }
 		end
