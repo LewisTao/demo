@@ -1,5 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
-
+	before_action :user_downcase, only: [:create]
+	
 	def create
 		user = User.find_by(email: params[:session][:email])
 		if user.present? && user.valid_password?(params[:session][:password])
@@ -18,4 +19,9 @@ class Api::V1::SessionsController < ApplicationController
 		user.save
 		head 204		
 	end
+
+	private
+		def user_downcase
+			params[:session][:email] = params[:session][:email].downcase			
+		end
 end

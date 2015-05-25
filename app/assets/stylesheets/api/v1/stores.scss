@@ -1,3 +1,24 @@
 // Place all the styles related to the api/v1/Stores controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.store_header {
+	position: relative;
+	text-align: center;
+	margin-bottom: 20px;
+	.store_image {
+		img {
+			width: 100%;
+		}
+		position: relative;
+	}
+	.store_title {
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+	}
+}
+
+.store_body {
+	
+}

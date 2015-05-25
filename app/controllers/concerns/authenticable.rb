@@ -1,21 +1,24 @@
 module Authenticable
 	
 
-	def api_current_user
-		#if request.headers["Authorization"] != nil
-			#@current_user ||= User.find_by(auth_token: request.headers["Authorization"])
-		#else
-			#super if defined?(super)
-		#end
-		@api_current_user ||= User.find_by(auth_token: request.headers["Authorization"])
+		def current_user
+			if request.headers["Authorization"] != nil
+				current_user ||= User.find_by(auth_token: request.headers["Authorization"])
+			else
+				super if defined?(super)
+			end
+		end
 
-	end
+		def authenticate_with_token!
+			unless user_signed_in?
+				respond_to do |format|
+					format.html { redirect_to root_path, notice: "Not authenticated" }
+					format.json { render json: { errors: "Not authenticated" }, status: :unauthorized }
+				end
+			end
+		end
 
-	def api_authenticate_with_token!
-		render json: { errors: "Not authenticated" }, status: :unauthorized unless api_user_signed_in?
-	end
-
-	def api_user_signed_in?
-		api_current_user.present?
-	end
+		def user_signed_in?
+			current_user.present?
+		end
 end

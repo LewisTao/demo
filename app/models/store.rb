@@ -5,7 +5,7 @@ class Store < ActiveRecord::Base
 	belongs_to :user
 
 	# Convert text to array
-	attr_accessor :day1, :day2
+	attr_accessor :Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun
 	serialize :open_time, Hash
 
 
@@ -13,7 +13,7 @@ class Store < ActiveRecord::Base
 	validates_presence_of :name, :description, :address, :open_time
 
 	# Image upload
-	has_attached_file :image, styles: { :medium => "300x300>", :thumb => "100x100>", :HD => "720x1280>" }
+	has_attached_file :image, styles: { :medium => "400x350#", :thumb => "100x100#", :HD => "1140x550#" }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 	
   	# New method

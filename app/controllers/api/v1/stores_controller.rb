@@ -1,8 +1,8 @@
 class Api::V1::StoresController < ApplicationController
 	# before filter
-	before_action :authenticate_with_token!
+	before_action :authenticate_with_token!, except: [:index, :show]
 	before_action :set_store, except: [:index, :new, :create]
-	before_action :check_admin
+	before_action :check_admin, except: [:index, :show]
 	
 
 	def index
@@ -38,9 +38,6 @@ class Api::V1::StoresController < ApplicationController
 	end
 
 	def edit
-		respond_to do |format|
-			format.html
-		end
 	end
 
 	def update
@@ -95,7 +92,7 @@ class Api::V1::StoresController < ApplicationController
 		end
 
 		def store_params
-			params.require(:store).permit(:name, :description, :address, {:open_time => [:day1, :day2]}, :image)
+			params.require(:store).permit(:name, :description, :address, {:open_time => [:Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun]}, :image)
 		end
 
 end

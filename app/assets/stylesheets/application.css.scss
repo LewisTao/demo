@@ -17,64 +17,20 @@
 @import "bootstrap";
 
 /*HEADER*/
-/*ul.block, ul.inline, ol.inline {
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-}
-ul.inline > li, ol.inline > li {
-  display: inline-block;
-  margin: 0px;
-  padding: 0px;
-}
-.section-header {
-	position: relative;
-	> .title {
-		text-align: center;
-		> h1 {
-			display: inline-block;
-			width: 280px;
-			text-align: center;
-			padding: 0px;
-			margin: 0px;
-		}
-	}
-	> .menu {
-		> .pull-left {
-			width: 50%;
-		}	
-		> .pull-right {
-			width: 50%;
-		}
-		ul {
-			> li {
-				padding: 16px;
-			}
-		}
-		@media screen and (min-width: 500px) {
-		    position: absolute;
-		    left: 0px;
-		    right: 0px;
-		    top: 50%;
-		    margin-top: -26px;
-		    > .pull-left {
-		    	padding-right: 150px;
-		    }
-		    > .pull-right {
-		    	padding-left: 150px;
-		    }
-		}
-	}
-}
-*/
+
 .container-fluid {
 	position: relative;
+	:hover {
+		color: #111;
+		text-decoration: none !important;
+	}
 }
 .navbar-title {
 	display: inline-block;
 	width: 100%;
 	text-align: center;
 	position: relative;
+	color: #777;
 } 
 
 .navbar-menu {
@@ -84,18 +40,28 @@ ul.inline > li, ol.inline > li {
 		right: 0px;
 		top: 50%;
 		position: absolute;
-		ul {
-			float: none !important;
+		top: 35px;
+		.pull-left {
+			padding-left: 150px;
 		}
-		ul {
-			float: none !important;
+		.pull-right {
+			padding-right: 150px;
 		}
 	}
 	.inline {
 		width: 50%;
-		li {
-			padding-left: 10px;
-			padding-right: 10px;
+		ul li {
+			font-size: 22px;
+			padding-left: 15px;
+			padding-right: 15px;
+			:hover {
+				color: #111;
+				text-decoration: none;
+			}
+			a {
+				color: #777;
+			}
 		}
 	}
 }
+

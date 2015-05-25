@@ -1,0 +1,14 @@
+.store_header
+	.store_image
+		= image_tag @store.image.url(:HD)
+	.store_title
+		%h1 test
+.store_body
+	.row
+		.col-md-9
+			= (@store.description)
+		.col-md-3
+			%p= @store.address
+			- ["Mon", "Tue", "Web", "Thu", "Fir", "Sat", "Sun" ].each do |day|
+				-if @store.open_time["#{day}"].present?
+					%p #{day}: #{@store.open_time["#{day}"]}
