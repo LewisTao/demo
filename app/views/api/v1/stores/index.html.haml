@@ -1,0 +1,4 @@
+%center
+	%h1 The Best Votes (Top 10)
+- @stores.each do |store|
+	= link_to image_tag(store.image.url(:medium)), api_store_path(store)

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
 	
   	# routes setup
-  	root 'static_pages#home_page'
+  	root 'api/v1/stores#index'
     get '/about', to: 'static_pages#about_page'
     get '/faq', to: 'static_pages#FAQ_page'
     
