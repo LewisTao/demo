@@ -3,6 +3,7 @@ class Store < ActiveRecord::Base
 	before_save :serialize_to_hash
 	
 	belongs_to :user
+	belongs_to :category
 
 	# Convert text to array
 	attr_accessor :Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun

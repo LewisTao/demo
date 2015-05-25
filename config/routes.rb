@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         end
         resources :stores, only: [:index, :show, :destroy]
         resources :sessions, only: [:create, :destroy]
+        resources :categories, only: [:index]
       end
   end
   

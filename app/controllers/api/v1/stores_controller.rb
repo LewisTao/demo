@@ -92,7 +92,7 @@ class Api::V1::StoresController < ApplicationController
 		end
 
 		def store_params
-			params.require(:store).permit(:name, :description, :address, {:open_time => [:Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun]}, :image)
+			params.require(:store).permit(:name, :description, :address, {:open_time => [:Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun]}, :image, :category_id)
 		end
 
 end
