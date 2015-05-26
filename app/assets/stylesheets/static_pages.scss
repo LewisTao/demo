@@ -2,12 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .static_page {
-	font-size: 16px;
-	line-height: 1.6em;
+	color: #222;
+  	width: 70%;
+  	margin: 40px auto;
 	h3 {
 		font-weight: bold;
 	}
-}
-.about {
-	margin-top: 20px;
+	.about {
+	}
 }

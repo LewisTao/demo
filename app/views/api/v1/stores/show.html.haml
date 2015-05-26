@@ -2,13 +2,20 @@
 	.store_image
 		= image_tag @store.image.url(:HD)
 	.store_title
-		%h1 test
-.store_body
-	.row
-		.col-md-9
-			= (@store.description)
-		.col-md-3
-			%p= @store.address
-			- ["Mon", "Tue", "Web", "Thu", "Fir", "Sat", "Sun" ].each do |day|
-				-if @store.open_time["#{day}"].present?
-					%p #{day}: #{@store.open_time["#{day}"]}
+		%h1= @store.name
+.container.clearfix
+	.store_body
+		.content.pull-left
+			= simple_format(@store.description)
+		.meta.pull-right
+			%ul.list-unstyled
+				%li.address
+					%p
+						%span.glyphicon.glyphicon-map-marker.icon
+						=  @store.address
+				%li
+					%span.glyphicon.glyphicon-time.icon
+					- ["Mon", "Tue", "Web", "Thu", "Fir", "Sat", "Sun" ].each do |day|
+						-if @store.open_time["#{day}"].present?
+							#{day}: #{@store.open_time["#{day}"]}
+							%br/
