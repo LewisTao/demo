@@ -12,7 +12,7 @@ class Store < ActiveRecord::Base
 
 
 	# Validates
-	validates_presence_of :name, :description, :address, :open_time
+	validates_presence_of :name, :description, :address
 
 	# Image upload
 	has_attached_file :image, styles: { :medium => "453x300#", :thumb => "200x200#", :HD => "1170x550#" }

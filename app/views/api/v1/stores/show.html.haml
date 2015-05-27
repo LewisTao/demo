@@ -23,7 +23,7 @@
 					%span.glyphicon.glyphicon-tag.icon
 					- ["notice_1", "notice_2", "notice_3"].each do |notice|
 						-if @store.notice["#{notice}"].present?
-							#{notice}: #{@store.notice["#{notice}"]}
+							#{@store.notice["#{notice}"]}
 							%br/
 .store_footer.center
 	.back_index

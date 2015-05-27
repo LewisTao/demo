@@ -12,7 +12,7 @@
 		width: 100%;
 		margin: 0px auto;
 		.collection {
-			width: 453px;
+			width: 33%px;
 			height: auto;
 			position: relative;
 			display: block;
@@ -78,6 +78,9 @@
 			line-height: inherit;
 		}
 		.open_time, .notice {
+			min-width: 280px;
+			line-height: 28px;
+			margin-bottom: 10px;
 			display: inline-flex;
 		}		
 	}
