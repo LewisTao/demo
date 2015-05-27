@@ -25,11 +25,9 @@ class Api::V1::StoresController < ApplicationController
 	end
 
 	def create
-		@category = Category.find_by(id: params[:category_id])
 		@store = current_user.stores.build(store_params)
 		respond_to do |format|
 			if @store.save
-				@category.store_id = @store.id
 				format.html { redirect_to api_store_path(@store), success: "Successfully created!" }
 				format.json { render json: @store, status: 201, location: [:api, @store] }
 			else

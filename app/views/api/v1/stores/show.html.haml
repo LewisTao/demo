@@ -19,3 +19,9 @@
 						-if @store.open_time["#{day}"].present?
 							#{day}: #{@store.open_time["#{day}"]}
 							%br/
+.store_footer.center
+	.back_index
+		= link_to root_path do
+			%span
+			%h3 BACK TO HOME PAGE
+			%span

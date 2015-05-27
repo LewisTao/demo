@@ -1,6 +1,14 @@
 // Place all the styles related to the api/v1/Categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.list {
-	text-align: center;
+.category_item_list {
+	h3 {
+		:hover {
+			color: #337ab7;
+			text-decoration: none;
+		}
+		a {
+			color: #777;
+		}
+	}
 }
