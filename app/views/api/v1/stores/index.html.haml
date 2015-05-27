@@ -1,4 +1,10 @@
-%center
-	%h1 The Best Votes (Top 10)
-- @stores.each do |store|
-	= link_to image_tag(store.image.url(:medium)), api_store_path(store)
+.collection-name
+	%h2 Coffee / Brunch
+.collection-list
+	#masonry-container.store.transitions-enabled
+		- @stores.each do |store|
+			.box
+				.store-image
+					= link_to image_tag(store.image.url(:medium)), api_store_path(store)
+				.store-name
+					%h1= link_to store.name, api_store_path(store)

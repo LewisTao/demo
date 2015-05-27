@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'haml', '~> 4.0.6'
+gem 'masonry-rails', '~> 0.2.4'
 
 # Devise gem
 gem 'devise', '~> 3.4.1'

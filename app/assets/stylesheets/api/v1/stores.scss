@@ -1,6 +1,43 @@
 // Place all the styles related to the api/v1/Stores controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* iNDEX */
+.collection-name {
+	text-align: center;
+}
+.collection-list {
+	#masonry-container {
+		margin: 0px auto;
+		width: 100%;
+		.box {
+			width: 453px;
+			.store-image img {
+				width: 100%;
+			}
+			.store-name {
+				position: absolute;
+				left: 0px;
+				right: 0px;
+				top: 35%;
+				h1 {
+					text-align: center;
+					:hover {
+						text-decoration: none !important;
+					}
+					a{
+						color: #fff;
+						font-size: 36px;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* SHOW */
 .store_header {
 	position: relative;
 	text-align: center;

@@ -14,7 +14,7 @@ class Store < ActiveRecord::Base
 	validates_presence_of :name, :description, :address, :open_time
 
 	# Image upload
-	has_attached_file :image, styles: { :medium => "390x350#", :thumb => "100x100#", :HD => "1170x550#" }
+	has_attached_file :image, styles: { :medium => "453x300#", :thumb => "200x200#", :HD => "1170x550#" }
   	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 	
   	# New method
