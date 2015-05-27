@@ -1,0 +1,12 @@
+.category.center
+	- @categories.each do |category|
+		%h1.category-name= category.name
+		.masonry-container
+			- category.stores.each do |store|
+				.collection
+					.collection-image
+						= link_to image_tag(store.image.url(:medium)), api_store_path(store)
+					.collection-name
+						%h1= link_to store.name, api_store_path(store)
+
+

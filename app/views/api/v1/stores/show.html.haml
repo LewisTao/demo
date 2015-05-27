@@ -1,0 +1,32 @@
+.store_header
+	.store_image
+		= image_tag @store.image.url(:HD)
+	.store_title
+		%h1= @store.name
+.container.clearfix
+	.store_body
+		.content.pull-left
+			= simple_format(@store.description)
+		.meta.pull-right
+			%ul.list-unstyled
+				%li.address
+					%p
+						%span.glyphicon.glyphicon-map-marker.icon
+						=  @store.address
+				%li.open_time
+					%span.glyphicon.glyphicon-time.icon
+					- ["Mon", "Tue", "Web", "Thu", "Fir", "Sat", "Sun" ].each do |day|
+						-if @store.open_time["#{day}"].present?
+							#{day}: #{@store.open_time["#{day}"]}
+							%br/
+				%li.notice
+					%span.glyphicon.glyphicon-tag.icon
+					- ["notice_1", "notice_2", "notice_3"].each do |notice|
+						-if @store.notice["#{notice}"].present?
+							#{@store.notice["#{notice}"]}
+							%br/
+.store_footer.center
+	.back_index
+		= link_to root_path do
+			%span.glyphicon.glyphicon-chevron-left
+			%h3 BACK TO HOME PAGE

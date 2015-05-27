@@ -1,0 +1,15 @@
+.nav.navbar-default
+	.container-fluid
+		= link_to root_path, class: "navbar-title" do
+			%h1
+				THE BEST OF
+				%br/
+				EAST LONDON
+		.navbar-menu.clearfix
+			%ul.list-unstyled.list-inline
+				.inline-left.pull-left
+					%li= link_to "LIST", api_categories_path
+					%li= link_to "MAP", root_path
+				.inline-right.pull-right
+					%li= link_to "FAQ", faq_path
+					%li= link_to "ABOUT", about_path	

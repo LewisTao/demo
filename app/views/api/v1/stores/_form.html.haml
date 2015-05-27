@@ -1,0 +1,15 @@
+= simple_form_for(@store, url: api_user_store_path(@store), html: { multipart: true }) do |f|
+	= f.input :name
+	= f.input :description
+	= f.input :address
+	= f.input :image
+	= f.simple_fields_for :open_time do |ff|
+		= ff.label :open_time
+		= ff.input :Mon
+		= ff.input :Tue
+		= ff.input :Web
+		= ff.input :Thu
+		= ff.input :Fri
+		= ff.input :Sat
+		= ff.input :Sun
+	= f.button :submit

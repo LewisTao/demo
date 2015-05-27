@@ -1,5 +1,22 @@
 source 'https://rubygems.org'
 
+gem 'haml', '~> 4.0.6'
+gem 'masonry-rails', '~> 0.2.4'
+
+# Devise gem
+gem 'devise', '~> 3.4.1'
+
+# Simple form
+gem 'simple_form', '~> 3.1.0'
+
+# Image upload
+gem 'paperclip', '~> 4.2.1'
+
+# Basic gem
+gem 'responders', '~> 2.0'
+gem 'rails_admin', '~> 0.6.7'
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'active_model_serializers', '~> 0.9.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -41,5 +58,12 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'ffaker', '~> 2.0.0'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+	gem 'shoulda-matchers', '~> 2.8.0'
 end
 

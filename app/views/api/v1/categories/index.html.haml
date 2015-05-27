@@ -1,0 +1,7 @@
+.container.center
+	- @categories.each do |category|
+		.category_name
+			%h1= category.name
+		.category_item_list
+			- Store.where(category_id: category.id).each do |store|
+				%h3= link_to store.name, api_store_path(store)
