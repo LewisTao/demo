@@ -6,8 +6,9 @@ class Store < ActiveRecord::Base
 	belongs_to :category
 
 	# Convert text to array
-	attr_accessor :Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun
+	attr_accessor :Mon, :Tue, :Wed, :Thu, :Fri, :Sat, :Sun, :notice_1, :notice_2, :notice_3
 	serialize :open_time, Hash
+	serialize :notice, Hash
 
 
 	# Validates
@@ -20,5 +21,6 @@ class Store < ActiveRecord::Base
   	# New method
 	def serialize_to_hash
 	  self.open_time = self.open_time.to_hash
+	  self.notice = self.notice.to_hash
 	end
 end

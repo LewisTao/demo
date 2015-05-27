@@ -13,11 +13,17 @@
 					%p
 						%span.glyphicon.glyphicon-map-marker.icon
 						=  @store.address
-				%li
+				%li.open_time
 					%span.glyphicon.glyphicon-time.icon
 					- ["Mon", "Tue", "Web", "Thu", "Fir", "Sat", "Sun" ].each do |day|
 						-if @store.open_time["#{day}"].present?
 							#{day}: #{@store.open_time["#{day}"]}
+							%br/
+				%li.notice
+					%span.glyphicon.glyphicon-tag.icon
+					- ["notice_1", "notice_2", "notice_3"].each do |notice|
+						-if @store.notice["#{notice}"].present?
+							#{notice}: #{@store.notice["#{notice}"]}
 							%br/
 .store_footer.center
 	.back_index
