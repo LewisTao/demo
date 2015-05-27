@@ -6,6 +6,7 @@ class Api::V1::StoresController < ApplicationController
 	
 
 	def index
+		@categories = Category.all
 		@stores = Store.all.order("created_at DESC")
 		respond_to do |format|
 			format.html

@@ -4,9 +4,9 @@
 
 
 $ ->
-	$('#masonry-container').imagesLoaded ->
-  		$('#masonry-container').masonry
-    		itemSelector: '.box',
+	$('.masonry-container').imagesLoaded ->
+  		$('.masonry-container').masonry
+    		itemSelector: '.collection',
     		isFitWidth: true,
 
 

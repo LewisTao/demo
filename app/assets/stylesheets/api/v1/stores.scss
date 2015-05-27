@@ -3,33 +3,30 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* iNDEX */
-.collection-name {
-	text-align: center;
-}
-.collection-list {
-	#masonry-container {
-		margin: 0px auto;
+.category {
+	.category-name {
+		margin-top: 35px;
+		margin-bottom: 25px;
+	}
+	.masonry-container {
 		width: 100%;
-		.box {
+		margin: 0px auto;
+		.collection {
 			width: 453px;
-			.store-image img {
-				width: 100%;
-			}
-			.store-name {
+			height: auto;
+			position: relative;
+			display: block;
+			.collection-name h1 {
 				position: absolute;
+				top: 30%;
 				left: 0px;
 				right: 0px;
-				top: 35%;
-				h1 {
-					text-align: center;
-					:hover {
-						text-decoration: none !important;
-					}
-					a{
-						color: #fff;
-						font-size: 36px;
-						font-weight: bold;
-					}
+				:hover {
+					text-decoration: none;
+					color: #337ab7;
+				}
+				a {
+					color: #fff;
 				}
 			}
 		}
@@ -82,6 +79,25 @@
 		}
 		ul li {
 			display: inline-flex;
+		}
+	}
+}
+
+.store_footer {
+	margin-bottom: 80px;
+	.back_index {
+		:hover {
+			color: #337ab7;
+			text-decoration: none;
+		}
+		a {
+			color: #111;
+			h3 {
+				display: inline-block;
+				font-size: 22px;
+  				font-weight: 700;
+  				font-family: "brandon-grotesque",sans-serif;
+			}
 		}
 	}
 }
