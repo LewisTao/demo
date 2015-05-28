@@ -260,4 +260,5 @@ Devise.setup do |config|
   # Accept Json
   #config.http_authenticatable_on_xhr = false
   #config.navigational_formats = ["*/*", :html, :json]
+  config.secret_key = 'df9bb35c4cc60f07cdb9cbb65a1438497aa3ef9c4e56bfaff55cd4e8a7154315ba221d0488dc863d33523c5bebf495117eafcb60ba9c43ae2c8fb0a6c5b23e8e'
 end
