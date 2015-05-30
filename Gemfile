@@ -50,6 +50,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor', '~> 0.0.3'
 end
 
 group :development, :test do
