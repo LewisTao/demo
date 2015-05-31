@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
     # api setup
-    namespace :api, constraints: {subdomain: 'sheltered-waters-4595'}, path: '/' do
+    namespace :api, constraints: {subdomain: 'demo'}, path: '/' do
       scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
         resources :users do
           resources :stores, only: [:create, :new, :update, :edit]
